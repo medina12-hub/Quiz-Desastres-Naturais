@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b2d">
+<title>Alerta! | Quiz de Segurança</title>
+<style>
+:root{--bg:#0b1423;--panel:#142238;--panel2:#1a2c45;--text:#f4f7fb;--muted:#a9b8ca;--red:#ff5b52;--gold:#ffc857;--cyan:#5dd6d0;--line:#2b405d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 85% 0%,#203755 0,transparent 34%),var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;line-height:1.55}
+header{padding:22px max(5vw,20px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff14;position:sticky;top:0;background:#0b1423eF;backdrop-filter:blur(12px);z-index:5}
+.logo{font-weight:950;letter-spacing:1.5px;font-size:1.35rem}.logo span{color:var(--red)}nav{display:flex;gap:22px}nav a{color:var(--muted);text-decoration:none;font-size:.92rem}nav a:hover{color:white}
+main{max-width:1100px;margin:auto;padding:38px 22px 70px}.hero{padding:50px 0 34px;display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center}
+.eyebrow{color:var(--gold);font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(2.5rem,6vw,4.8rem);line-height:1.02;letter-spacing:-2px;margin:14px 0 20px}.hero p{color:var(--muted);max-width:620px;font-size:1.08rem}
+.hero-art{min-height:245px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#1d3553,#111d30);display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-art .symbol{font-size:7rem;filter:drop-shadow(0 12px 20px #0008)}.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #ffffff18;border-radius:50%;width:260px;height:260px}.hero-art:after{width:340px;height:340px}
+.button{border:0;border-radius:12px;padding:13px 19px;font-weight:800;cursor:pointer;background:var(--red);color:white;transition:.2s}.button:hover{transform:translateY(-2px);filter:brightness(1.08)}.button.secondary{background:#263c58;color:white;border:1px solid var(--line)}.button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:42px 0 18px}.section-head h2{font-size:1.8rem;margin:0}.section-head p{color:var(--muted);margin:4px 0 0}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.category{background:var(--panel);border:1px solid var(--line);padding:21px;border-radius:18px;cursor:pointer;text-align:left;color:var(--text);transition:.2s;min-height:160px}.category:hover,.category.active{border-color:var(--gold);transform:translateY(-3px);background:var(--panel2)}.category .emoji{font-size:2rem}.category h3{margin:10px 0 4px}.category p{margin:0;color:var(--muted);font-size:.9rem}
+.quiz{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);display:none}.quiz.show{display:block}.quiz-top{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;gap:12px}.progress{height:8px;background:#293d56;border-radius:20px;margin:14px 0 25px;overflow:hidden}.progress div{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));width:0;transition:.3s}
+#question{font-size:1.45rem;line-height:1.3;margin:0 0 20px}.answers{display:grid;gap:11px}.answer{background:#1b2d45;border:1px solid #344b68;color:var(--text);border-radius:13px;padding:14px 16px;text-align:left;font-size:1rem;cursor:pointer}.answer:hover:not(:disabled){border-color:var(--cyan);background:#223a55}.answer.correct{border-color:#43d6a2;background:#123d39}.answer.wrong{border-color:var(--red);background:#482a32}.feedback{padding:15px;border-radius:12px;margin:17px 0 0;background:#21364f;color:#dce8f5}.feedback.good{border-left:4px solid #43d6a2}.feedback.bad{border-left:4px solid var(--red)}
+.quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}.result{text-align:center;padding:25px 0}.result .score{font-size:3.5rem;font-weight:950;color:var(--gold)}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.tip{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}.tip strong{display:block;margin:8px 0}.tip p{color:var(--muted);font-size:.92rem;margin:0}
+.alert{margin-top:38px;padding:22px;border-radius:18px;border:1px solid #8a6531;background:#332a1d;color:#ffe7b4}.alert strong{color:var(--gold)}
+footer{border-top:1px solid #ffffff18;padding:25px;text-align:center;color:var(--muted);font-size:.85rem}
+@media(max-width:760px){nav{gap:12px}nav a{font-size:.8rem}.hero{grid-template-columns:1fr;padding-top:30px}.hero-art{min-height:180px}.categories,.tips{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}header{padding:16px 20px}}
+</style>
+</head>
+<body>
+<header><div class="logo">ALERTA<span>!</span></div><nav><a href="#quizzes">Quizzes</a><a href="#dicas">Dicas rápidas</a><a href="#seguranca">Segurança</a></nav></header>
+<main>
+<section class="hero">
+ <div><div class="eyebrow">Conhecimento salva vidas</div><h1>Você está pronto para uma emergência?</h1><p>Teste seus conhecimentos sobre enchentes, vendavais, deslizamentos, raios e outros desastres naturais. Aprenda enquanto joga e descubra como agir com mais segurança.</p><button class="button" onclick="document.querySelector('#quizzes').scrollIntoView()">Começar os quizzes ↓</button></div>
+ <div class="hero-art"><div class="symbol">🌪️</div></div>
+</section>
+<section id="quizzes">
+ <div class="section-head"><div><div class="eyebrow">Aprenda na prática</div><h2>Escolha seu desafio</h2><p>Selecione um tema para iniciar. Cada rodada tem cinco perguntas.</p></div></div>
+ <div class="categories" id="categories"></div>
+ <div class="quiz" id="quiz">
+  <div class="quiz-top"><span id="topic">Tema</span><span id="counter">Pergunta 1 de 5</span></div><div class="progress"><div id="bar"></div></div>
+  <h2 id="question"></h2><div class="answers" id="answers"></div><div id="feedback" class="feedback" hidden></div>
+  <div class="quiz-actions"><span id="points" style="color:var(--muted)">Pontos: 0</span><button class="button" id="next" disabled>Próxima pergunta →</button></div>
+ </div>
+</section>
+<section id="dicas">
+ <div class="section-head"><div><div class="eyebrow">Guarde estas informações</div><h2>Dicas rápidas de proteção</h2></div></div>
+ <div class="tips">
+  <article class="tip"><span style="font-size:1.8rem">🌊</span><strong>Em caso de enchente</strong><p>Vá para um local mais alto. Não atravesse ruas alagadas a pé, de bicicleta ou de carro. Afaste-se de água em contato com fios elétricos.</p></article>
+  <article class="tip"><span style="font-size:1.8rem">🌬️</span><strong>Durante um vendaval</strong><p>Fique dentro de uma construção resistente, longe de janelas. Não se abrigue sob árvores, postes ou estruturas frágeis.</p></article>
+  <article class="tip"><span style="font-size:1.8rem">⛰️</span><strong>Risco de deslizamento</strong><p>Observe rachaduras, inclinação de árvores ou postes e estalos no terreno. Saia da área de risco e avise a Defesa Civil.</p></article>
+ </div>
+</section>
+<section id="seguranca">
+ <div class="alert"><strong>⚠️ Atenção:</strong> em uma emergência real, priorize sair da área de risco e seguir as orientações das autoridades. No Brasil, ligue 199 para a Defesa Civil, 193 para os Bombeiros ou 192 para o SAMU, conforme a situação. Não espere terminar um quiz para pedir ajuda.</div>
+</section>
+</main>
+<footer>ALERTA! • Informação, prevenção e preparação para salvar vidas.<br>Conteúdo educativo. Siga sempre os alertas e orientações oficiais da sua região.</footer>
+<script>
+const quizzes=[
+{title:"Enchentes e alagamentos",icon:"🌊",desc:"Água subindo? Saiba como agir.",qs:[
+["A água começou a subir rapidamente na rua. O que você deve fazer?",["Tentar atravessar antes que suba mais","Procurar um local alto e seguro","Ficar perto de bueiros"],1,"Procure um local alto e seguro. Não tente atravessar áreas alagadas: a força e a profundidade da água podem enganar."],
+["Durante uma enchente, um fio elétrico caiu na água. Qual é a atitude correta?",["Afastar-se e avisar as autoridades","Puxar o fio com um pedaço de madeira","Passar rapidamente pelo local"],0,"Água pode conduzir eletricidade. Mantenha distância e avise os serviços de emergência."],
+["É seguro dirigir por uma rua coberta pela água?",["Sim, se o carro for alto","Sim, mantendo velocidade","Não. A água pode arrastar o veículo"],2,"Mesmo pouca água em movimento pode arrastar veículos. Nunca tente cruzar uma via alagada."],
+["O que é importante preparar antes do período de chuvas?",["Um kit de emergência e documentos protegidos","Apenas roupas extras","Nada, pois não dá para prever"],0,"Um kit com água, alimentos não perecíveis, lanterna, pilhas, medicamentos necessários e documentos protegidos ajuda na preparação."],
+["Você recebeu um alerta oficial para deixar uma área de risco. O que fazer?",["Esperar para ver se piora","Evacuar conforme a orientação","Ir até o rio observar"],1,"Siga prontamente a orientação de evacuação e use rotas seguras indicadas pelas autoridades."]]},
+{title:"Vendavais e tempestades",icon:"🌪️",desc:"Ventos fortes, objetos e estruturas.",qs:[
+["Começou um vendaval. Onde é mais seguro ficar?",["Perto de uma janela para observar","Dentro de uma construção resistente, longe das janelas","Debaixo de uma árvore"],1,"Fique em local fechado e resistente, longe de janelas e objetos que possam quebrar ou ser arremessados."],
+["O que fazer com objetos soltos no quintal antes de uma tempestade, se ainda for seguro?",["Prendê-los ou guardá-los","Deixá-los no telhado","Colocá-los perto de fios"],0,"Objetos soltos podem ser lançados pelo vento. Recolha ou fixe-os apenas antes da chegada do perigo."],
+["Durante ventos muito fortes, é seguro se abrigar sob uma árvore?",["Sim, qualquer árvore serve","Somente árvores grandes","Não, galhos podem cair e a árvore pode tombar"],2,"Árvores e postes oferecem risco durante vendavais. Prefira abrigo em construção resistente."],
+["Um telhado começa a se soltar durante o vendaval. O que fazer?",["Subir para consertá-lo","Afastar-se e permanecer em abrigo seguro","Segurar as telhas"],1,"Não tente reparar estruturas durante o evento. Afaste-se de áreas expostas e aguarde ajuda especializada."],
+["Qual atitude ajuda antes de uma tempestade severa?",["Acompanhar alertas oficiais e planejar um abrigo","Ignorar avisos se o céu estiver claro","Ficar em campo aberto"],0,"Acompanhe a previsão e os alertas oficiais. Tenha um local seguro definido com antecedência."]]},
+{title:"Raios e trovoadas",icon:"⚡",desc:"Proteja-se durante descargas elétricas.",qs:[
+["Você ouviu trovões enquanto está ao ar livre. O que fazer?",["Buscar abrigo em uma construção fechada","Ficar sob uma árvore isolada","Deitar em campo aberto"],0,"Procure imediatamente uma construção fechada. Veículos com teto rígido também podem oferecer proteção."],
+["Durante uma tempestade com raios, qual lugar deve ser evitado?",["Uma casa fechada","Um carro fechado","Uma área aberta ou perto de água"],2,"Campos, praias, piscinas e corpos d'água são locais perigosos durante tempestades com raios."],
+["É seguro tomar banho em chuveiro ligado à rede durante uma tempestade com raios?",["É melhor evitar","Sim, sem problema","Somente se a luz estiver acesa"],0,"Evite contato com água encanada e equipamentos conectados à rede elétrica durante a tempestade."],
+["Quando é seguro voltar para atividades ao ar livre?",["Assim que parar de chover","Após pelo menos 30 minutos desde o último trovão","Quando aparecer uma abertura nas nuvens"],1,"Aguarde pelo menos 30 minutos após o último trovão antes de retomar atividades ao ar livre."],
+["Se alguém for atingido por um raio, a pessoa pode receber ajuda?",["Não, tocar nela é perigoso","Sim, é seguro tocar e chamar emergência","É preciso esperar a pessoa acordar"],1,"A vítima não fica eletricamente carregada. Acione emergência e inicie primeiros socorros/ RCP se souber e for necessário."]]},
+{title:"Deslizamentos",icon:"⛰️",desc:"Reconheça sinais de instabilidade do solo.",qs:[
+["Qual pode ser um sinal de risco de deslizamento?",["Rachaduras novas no solo ou nas paredes","Folhas caindo no outono","Poças pequenas longe de encostas"],0,"Rachaduras, inclinação de árvores ou postes, água barrenta surgindo no terreno e estalos podem indicar instabilidade."],
+["Sua casa fica perto de uma encosta e surgiram rachaduras após chuva intensa. O que fazer?",["Ignorar até a próxima semana","Sair da área de risco e avisar a Defesa Civil","Cavar para descobrir a causa"],1,"Saia com segurança e informe a Defesa Civil. Não tente investigar ou fazer reparos na encosta."],
+["Por que chuvas prolongadas aumentam o risco de deslizamentos?",["Porque deixam o solo mais saturado e instável","Porque secam o terreno","Porque impedem qualquer movimento do solo"],0,"A água pode aumentar o peso do solo e reduzir sua resistência, favorecendo movimentos de massa."],
+["Se ouvir estalos e perceber movimentação do terreno, o que fazer?",["Aproximar-se para filmar","Evacuar imediatamente por rota segura","Esperar uma confirmação visual"],1,"Afaste-se imediatamente da encosta e siga as orientações da Defesa Civil. Não se aproxime para registrar imagens."],
+["Quem deve avaliar e orientar sobre risco de deslizamento?",["Apenas vizinhos","Influenciadores locais","Defesa Civil e equipes técnicas competentes"],2,"A Defesa Civil e profissionais técnicos podem avaliar o risco e orientar medidas de proteção."]]},
+{title:"Preparação e primeiros passos",icon:"🎒",desc:"Monte seu plano para emergências.",qs:[
+["O que não pode faltar em um kit básico de emergência?",["Lanterna, água, rádio ou celular carregado e itens essenciais","Somente brinquedos","Velas acesas e fogos"],0,"Prepare água, alimentos, lanterna, pilhas, rádio, carregador, documentos, medicamentos necessários e itens de higiene."],
+["Qual é uma boa atitude para famílias?",["Combinar um ponto de encontro e contatos","Cada pessoa sair sem avisar","Depender apenas da internet"],0,"Planeje rotas, ponto de encontro e contatos. Combine como agir caso a família fique separada."],
+["Onde acompanhar alertas de risco?",["Somente mensagens sem fonte","Canais oficiais da Defesa Civil e autoridades","Rumores em grupos"],1,"Use canais oficiais e confirme informações antes de compartilhar. Em Santa Catarina, acompanhe a Defesa Civil estadual e municipal."],
+["Ao receber ordem de evacuação, o que levar?",["Tudo que existe em casa","Somente objetos pesados","Pessoas, animais se possível com segurança, documentos e itens essenciais"],2,"Não atrase a saída para recolher pertences. Leve o essencial apenas se isso não colocar ninguém em risco."],
+["Qual é a melhor regra durante um desastre?",["Se arriscar para salvar objetos","Priorizar vidas e seguir orientações oficiais","Voltar para buscar algo assim que possível"],1,"A prioridade é proteger vidas. Não retorne a áreas interditadas até liberação das autoridades."]]}
+];
+let current=0,index=0,score=0,answered=false;
+const categories=document.getElementById('categories'),quiz=document.getElementById('quiz');
+quizzes.forEach((q,i)=>{let b=document.createElement('button');b.className='category';b.innerHTML=`<div class="emoji">${q.icon}</div><h3>${q.title}</h3><p>${q.desc}</p>`;b.onclick=()=>start(i);categories.appendChild(b)});
+function start(i){current=i;index=0;score=0;quiz.classList.add('show');document.querySelectorAll('.category').forEach((b,j)=>b.classList.toggle('active',j===i));render();quiz.scrollIntoView({behavior:'smooth',block:'start'})}
+function render(){let q=quizzes[current].qs[index];answered=false;document.getElementById('topic').textContent=quizzes[current].title;document.getElementById('counter').textContent=`Pergunta ${index+1} de ${quizzes[current].qs.length}`;document.getElementById('bar').style.width=`${index/quizzes[current].qs.length*100}%`;document.getElementById('question').textContent=q[0];document.getElementById('points').textContent=`Pontos: ${score}`;document.getElementById('feedback').hidden=true;document.getElementById('next').disabled=true;document.getElementById('next').textContent=index===4?'Ver resultado':'Próxima pergunta →';let box=document.getElementById('answers');box.innerHTML='';q[1].forEach((a,j)=>{let b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+j)+') '+a;b.onclick=()=>choose(j);box.appendChild(b)})}
+function choose(n){if(answered)return;answered=true;let q=quizzes[current].qs[index],buttons=[...document.querySelectorAll('.answer')];buttons.forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add('correct');if(j===n&&n!==q[2])b.classList.add('wrong')});let good=n===q[2];if(good)score++;let f=document.getElementById('feedback');f.hidden=false;f.className='feedback '+(good?'good':'bad');f.innerHTML=`<strong>${good?'✓ Resposta correta!':'✕ Não foi dessa vez.'}</strong><br>${q[3]}`;document.getElementById('points').textContent=`Pontos: ${score}`;document.getElementById('next').disabled=false}
+document.getElementById('next').onclick=()=>{if(index<4){index++;render()}else result()};
+function result(){document.getElementById('bar').style.width='100%';document.getElementById('counter').textContent='Desafio concluído';document.getElementById('question').textContent='';document.getElementById('answers').innerHTML=`<div class="result"><div class="score">${score}/5</div><h2>${score===5?'Mandou muito bem! 🏆':score>=3?'Boa! Continue aprendendo.':'Hora de reforçar os conhecimentos!'}</h2><p style="color:var(--muted)">Você acertou ${score} de 5 perguntas em ${quizzes[current].title}.</p><button class="button secondary" onclick="start(current)">Refazer quiz</button> <button class="button" onclick="document.querySelector('#quizzes').scrollIntoView()">Escolher outro tema</button></div>`;document.getElementById('feedback').hidden=true;document.getElementById('next').disabled=true;document.getElementById('next').textContent='Concluído';document.getElementById('points').textContent=`Pontuação final: ${score}/5`}
+</script>
+</body>
+</html>
